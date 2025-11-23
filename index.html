@@ -9,7 +9,8 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
     }
 
     body {
@@ -18,20 +19,68 @@
       align-items: center;
       justify-content: center;
       background:
-        radial-gradient(circle at 20% 0%, rgba(0, 180, 255, 0.4), transparent 55%),
-        radial-gradient(circle at 80% 100%, rgba(0, 255, 200, 0.3), transparent 55%),
-        linear-gradient(180deg, #021321 0%, #01253b 45%, #001726 100%);
+        radial-gradient(circle at 15% 0%, rgba(0, 210, 255, 0.35), transparent 55%),
+        radial-gradient(circle at 85% 100%, rgba(0, 255, 190, 0.35), transparent 55%),
+        linear-gradient(180deg, #01101b 0%, #02263c 45%, #010f1b 100%);
       color: #f5f7ff;
+      padding: 16px;
     }
 
     .card {
       width: 100%;
       max-width: 440px;
-      background: rgba(5, 10, 26, 0.96);
-      border-radius: 20px;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 255, 200, 0.14), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(0, 170, 255, 0.18), transparent 55%),
+        rgba(3, 22, 40, 0.86);
+      border-radius: 26px;
       padding: 24px 20px 18px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(97, 178, 255, 0.35);
+      box-shadow:
+        0 22px 50px rgba(0, 0, 0, 0.85),
+        0 0 40px rgba(0, 230, 255, 0.5);
+      border: 1px solid rgba(120, 220, 255, 0.7);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* soft “bubble” highlights */
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 60%);
+      opacity: 0.5;
+      filter: blur(2px);
+      pointer-events: none;
+      animation: float 18s linear infinite;
+    }
+
+    .card::before {
+      width: 140px;
+      height: 140px;
+      top: 60%;
+      left: -40px;
+    }
+
+    .card::after {
+      width: 110px;
+      height: 110px;
+      top: -30px;
+      right: -20px;
+      animation-duration: 24s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-16px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
     }
 
     .badge {
@@ -40,12 +89,14 @@
       gap: 6px;
       padding: 4px 11px;
       border-radius: 999px;
-      background: rgba(35, 134, 255, 0.12);
+      background: rgba(10, 160, 250, 0.18);
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #7ec3ff;
+      color: #7fe0ff;
       margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .badge-dot {
@@ -59,39 +110,49 @@
     h1 {
       font-size: 22px;
       margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
     }
 
     .subtitle {
       font-size: 13px;
-      color: #8f9bb8;
+      color: #9fb4d8;
       margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
     }
 
     label {
       font-size: 12px;
-      color: #9daccc;
+      color: #a3c0e4;
       display: block;
       margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
     }
 
     input {
       width: 100%;
       padding: 10px 11px;
-      border-radius: 10px;
-      border: 1px solid #233355;
-      background: rgba(8, 13, 30, 0.95);
+      border-radius: 12px;
+      border: 1px solid #26466b;
+      background: rgba(3, 17, 34, 0.96);
       color: #f5f7ff;
       font-size: 13px;
       outline: none;
+      position: relative;
+      z-index: 1;
     }
 
     input::placeholder {
-      color: #555f7a;
+      color: #596a86;
     }
 
     input:focus {
-      border-color: #3f8cff;
-      box-shadow: 0 0 0 1px rgba(63, 140, 255, 0.5);
+      border-color: #40b8ff;
+      box-shadow:
+        0 0 0 1px rgba(64, 184, 255, 0.5),
+        0 0 18px rgba(0, 220, 255, 0.55);
     }
 
     .btn-row {
@@ -99,6 +160,8 @@
       gap: 10px;
       margin-top: 12px;
       margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
     }
 
     button {
@@ -109,43 +172,51 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s,
+        opacity 0.08s;
     }
 
     .btn-secondary {
-      background: rgba(15, 26, 55, 0.96);
-      color: #c6d4ff;
-      border: 1px solid #283864;
+      background: rgba(8, 32, 63, 0.96);
+      color: #cbe0ff;
+      border: 1px solid #27466a;
     }
 
     .btn-secondary:hover {
-      background: rgba(25, 38, 74, 0.98);
+      background: rgba(14, 46, 86, 0.98);
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #2cf1b1, #49a5ff);
-      color: #020511;
-      box-shadow: 0 10px 22px rgba(35, 167, 255, 0.6);
+      background: radial-gradient(circle at 0% 0%, #2cf1b1, #00d2ff);
+      color: #030915;
+      box-shadow:
+        0 10px 24px rgba(0, 180, 255, 0.75),
+        0 0 22px rgba(0, 255, 230, 0.7);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 26px rgba(35, 167, 255, 0.8);
+      box-shadow:
+        0 12px 28px rgba(0, 180, 255, 0.9),
+        0 0 26px rgba(0, 255, 230, 0.9);
     }
 
     .result-box {
       padding: 12px 11px;
-      border-radius: 12px;
-      background: rgba(8, 18, 38, 0.98);
-      border: 1px solid rgba(64, 110, 255, 0.4);
+      border-radius: 16px;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 255, 210, 0.13), transparent 55%),
+        rgba(4, 21, 45, 0.98);
+      border: 1px solid rgba(82, 150, 255, 0.5);
       margin-bottom: 10px;
       min-height: 56px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 4px;
+      position: relative;
+      z-index: 1;
     }
 
     .result-title {
@@ -159,34 +230,40 @@
     }
 
     .result-value.ok {
-      color: #2cf1b1;
+      color: #3af0c2;
+      text-shadow: 0 0 10px rgba(58, 240, 194, 0.7);
     }
 
     .result-value.nope {
-      color: #ff6474;
+      color: #ff7384;
     }
 
     .result-extra {
       font-size: 11px;
-      color: #7a87aa;
+      color: #7b8ab0;
     }
 
     .hint {
       font-size: 11px;
-      color: #6c789b;
+      color: #6f82a6;
       line-height: 1.45;
+      margin-top: 6px;
+      position: relative;
+      z-index: 1;
     }
 
     .hint strong {
-      color: #cdd7ff;
+      color: #d4e2ff;
       font-weight: 600;
     }
 
     .brand {
       font-size: 10px;
       text-align: center;
-      margin-top: 8px;
-      color: #546086;
+      margin-top: 10px;
+      color: #5a6f98;
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
@@ -199,7 +276,7 @@
 
     <h1>Gocto Airdrop Checker</h1>
     <p class="subtitle">
-      Fun-only mock checker for <strong>$PHRS</strong> on Gocto vibes.  
+      Fun-only mock checker for <strong>$PHRS</strong> with underwater Gocto vibes.  
       Not official. Never paste your private key.
     </p>
 
@@ -231,115 +308,69 @@
     </p>
 
     <div class="brand">
-      Made by sailors • Gocto.fun energy only 🌊
+      Made by sailors • Gocto.fun underwater energy only 🌊
     </div>
   </div>
 
   <script>
-  const walletInput = document.getElementById("wallet");
-  const checkBtn = document.getElementById("checkBtn");
-  const randomWalletBtn = document.getElementById("randomWalletBtn");
-  const resultText = document.getElementById("resultText");
-  const resultExtra = document.getElementById("resultExtra");
+    const walletInput = document.getElementById("wallet");
+    const checkBtn = document.getElementById("checkBtn");
+    const randomWalletBtn = document.getElementById("randomWalletBtn");
+    const resultText = document.getElementById("resultText");
+    const resultExtra = document.getElementById("resultExtra");
 
-  function randomHex(len) {
-    const chars = "0123456789abcdef";
-    let out = "0x";
-    for (let i = 0; i < len; i++) {
-      out += chars[Math.floor(Math.random() * chars.length)];
+    function randomHex(len) {
+      const chars = "0123456789abcdef";
+      let out = "0x";
+      for (let i = 0; i < len; i++) {
+        out += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return out;
     }
-    return out;
-  }
-
-  randomWalletBtn.addEventListener("click", () => {
-    walletInput.value = randomHex(40);
-    resultText.textContent = 'Random wallet generated. Tap "$PHRS eligibility".';
-    resultText.classList.remove("ok", "nope");
-    resultExtra.textContent = "This address is just for fun, not on-chain.";
-  });
-
-  checkBtn.addEventListener("click", () => {
-    const wallet = walletInput.value.trim();
-
-    if (!wallet || wallet.length < 6) {
-      resultText.textContent = "Please enter a longer wallet (or any random text).";
-      resultText.classList.remove("ok", "nope");
-      resultExtra.textContent = "Example: 0xabc123... or your meme name.";
-      return;
-    }
-
-    // FUN LOGIC ONLY – NOT REAL ELIGIBILITY
-    // ~70% chance: Eligible with 100–10,000 random $PHRS
-    const roll = Math.random();
-
-    let mainMessage = "";
-    let extraMessage = "";
-    let cssClass = "";
-
-    if (roll < 0.7) {
-      const min = 100;
-      const max = 10000;
-      const amount =
-        Math.floor(Math.random() * (max - min + 1)) + min; // 100–10000
-
-      mainMessage = `Eligible: ${amount.toLocaleString()} $PHRS (Gocto fun mode) 🎉`;
-      extraMessage =
-        "Random fun allocation between 100 and 10,000 $PHRS. This is not real airdrop math.";
-      cssClass = "ok";
-    } else {
-      mainMessage = "Not Eligible in this Gocto fun checker 😅";
-      extraMessage =
-        "Try another wallet, or wait for the next Gocto / Pharos wave.";
-      cssClass = "nope";
-    }
-
-    resultText.textContent = mainMessage;
-    resultText.classList.remove("ok", "nope");
-    resultText.classList.add(cssClass);
-    resultExtra.textContent = extraMessage;
-  });
-</script>
 
     randomWalletBtn.addEventListener("click", () => {
       walletInput.value = randomHex(40);
-      resultText.textContent = "Random wallet generated. Tap “$PHRS eligibility”.";
+      resultText.textContent =
+        'Random wallet generated. Tap "$PHRS eligibility".';
       resultText.classList.remove("ok", "nope");
-      resultExtra.textContent = "This address is just for fun, not on-chain.";
+      resultExtra.textContent =
+        "This address is just for fun, not on-chain.";
     });
 
     checkBtn.addEventListener("click", () => {
       const wallet = walletInput.value.trim();
 
       if (!wallet || wallet.length < 6) {
-        resultText.textContent = "Please enter a longer wallet (or any random text).";
+        resultText.textContent =
+          "Please enter a longer wallet (or any random text).";
         resultText.classList.remove("ok", "nope");
-        resultExtra.textContent = "Example: 0xabc123... or your meme name.";
+        resultExtra.textContent =
+          "Example: 0xabc123... or your meme name.";
         return;
       }
 
-      // Simple fun logic – NOT REAL ELIGIBILITY
-      let score = 0;
-      for (let i = 0; i < wallet.length; i++) {
-        score += wallet.charCodeAt(i);
-      }
-
-      const tier = score % 3; // 0,1,2
+      // FUN LOGIC ONLY – NOT REAL ELIGIBILITY
+      // ~70% chance: Eligible with 100–10,000 random $PHRS
+      const roll = Math.random();
 
       let mainMessage = "";
       let extraMessage = "";
       let cssClass = "";
 
-      if (tier === 0) {
-        mainMessage = "Eligible: $PHRS bonus (Gocto Wave OG) 🎉";
-        extraMessage = "Fun-mode only. You hit an OG sailor combo in this checker.";
-        cssClass = "ok";
-      } else if (tier === 1) {
-        mainMessage = "Eligible: $PHRS bonus (Gocto small wave) ✨";
-        extraMessage = "Nice roll! This wallet looks lucky in our meme logic.";
+      if (roll < 0.7) {
+        const min = 100;
+        const max = 10000;
+        const amount =
+          Math.floor(Math.random() * (max - min + 1)) + min; // 100–10000
+
+        mainMessage = `Eligible: ${amount.toLocaleString()} $PHRS (Gocto fun mode) 🎉`;
+        extraMessage =
+          "Random fun allocation between 100 and 10,000 $PHRS. This is not real airdrop math.";
         cssClass = "ok";
       } else {
         mainMessage = "Not Eligible in this Gocto fun checker 😅";
-        extraMessage = "Try another wallet, or wait for the next Gocto / Pharos wave.";
+        extraMessage =
+          "Try another wallet, or wait for the next Gocto / Pharos wave.";
         cssClass = "nope";
       }
 
@@ -350,4 +381,4 @@
     });
   </script>
 </body>
-</html>
+  </html>
