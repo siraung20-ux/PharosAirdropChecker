@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gocto Airdrop Checker – $PHRS Fun Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #132a4a, #050814);
+      color: #f5f7ff;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(5, 10, 26, 0.96);
+      border-radius: 20px;
+      padding: 24px 20px 18px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(97, 178, 255, 0.35);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: rgba(35, 134, 255, 0.12);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7ec3ff;
+      margin-bottom: 12px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #32e9a5;
+      box-shadow: 0 0 10px rgba(50, 233, 165, 0.9);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #8f9bb8;
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-size: 12px;
+      color: #9daccc;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 11px;
+      border-radius: 10px;
+      border: 1px solid #233355;
+      background: rgba(8, 13, 30, 0.95);
+      color: #f5f7ff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #555f7a;
+    }
+
+    input:focus {
+      border-color: #3f8cff;
+      box-shadow: 0 0 0 1px rgba(63, 140, 255, 0.5);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      margin-bottom: 14px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 999px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s;
+    }
+
+    .btn-secondary {
+      background: rgba(15, 26, 55, 0.96);
+      color: #c6d4ff;
+      border: 1px solid #283864;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(25, 38, 74, 0.98);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2cf1b1, #49a5ff);
+      color: #020511;
+      box-shadow: 0 10px 22px rgba(35, 167, 255, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(35, 167, 255, 0.8);
+    }
+
+    .result-box {
+      padding: 12px 11px;
+      border-radius: 12px;
+      background: rgba(8, 18, 38, 0.98);
+      border: 1px solid rgba(64, 110, 255, 0.4);
+      margin-bottom: 10px;
+      min-height: 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .result-title {
+      font-size: 12px;
+      color: #9daccc;
+    }
+
+    .result-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .result-value.ok {
+      color: #2cf1b1;
+    }
+
+    .result-value.nope {
+      color: #ff6474;
+    }
+
+    .result-extra {
+      font-size: 11px;
+      color: #7a87aa;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #6c789b;
+      line-height: 1.45;
+    }
+
+    .hint strong {
+      color: #cdd7ff;
+      font-weight: 600;
+    }
+
+    .brand {
+      font-size: 10px;
+      text-align: center;
+      margin-top: 8px;
+      color: #546086;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      GOCTO • $PHRS FUN TOOL
+    </div>
+
+    <h1>Gocto Airdrop Checker</h1>
+    <p class="subtitle">
+      Fun-only mock checker for <strong>$PHRS</strong> on Gocto vibes.  
+      Not official. Never paste your private key.
+    </p>
+
+    <div>
+      <label for="wallet">Wallet address (fake is okay 😅)</label>
+      <input
+        id="wallet"
+        type="text"
+        placeholder="0x1234... or any random text"
+      />
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" id="randomWalletBtn">Random wallet</button>
+      <button class="btn-primary" id="checkBtn">$PHRS eligibility</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-title">Result</div>
+      <div class="result-value" id="resultText">No wallet checked yet.</div>
+      <div class="result-extra" id="resultExtra">
+        Type any wallet and hit “$PHRS eligibility”.
+      </div>
+    </div>
+
+    <p class="hint">
+      This checker is <strong>for memes and testing only</strong>.  
+      Real airdrop details for Gocto / Pharos ➜ wait for <strong>official announcements</strong>. 🐙
+    </p>
+
+    <div class="brand">
+      Made by sailors • Gocto.fun energy only 🌊
+    </div>
+  </div>
+
+  <script>
+    const walletInput = document.getElementById("wallet");
+    const checkBtn = document.getElementById("checkBtn");
+    const randomWalletBtn = document.getElementById("randomWalletBtn");
+    const resultText = document.getElementById("resultText");
+    const resultExtra = document.getElementById("resultExtra");
+
+    function randomHex(len) {
+      const chars = "0123456789abcdef";
+      let out = "0x";
+      for (let i = 0; i < len; i++) {
+        out += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return out;
+    }
+
+    randomWalletBtn.addEventListener("click", () => {
+      walletInput.value = randomHex(40);
+      resultText.textContent = "Random wallet generated. Tap “$PHRS eligibility”.";
+      resultText.classList.remove("ok", "nope");
+      resultExtra.textContent = "This address is just for fun, not on-chain.";
+    });
+
+    checkBtn.addEventListener("click", () => {
+      const wallet = walletInput.value.trim();
+
+      if (!wallet || wallet.length < 6) {
+        resultText.textContent = "Please enter a longer wallet (or any random text).";
+        resultText.classList.remove("ok", "nope");
+        resultExtra.textContent = "Example: 0xabc123... or your meme name.";
+        return;
+      }
+
+      // Simple fun logic – NOT REAL ELIGIBILITY
+      let score = 0;
+      for (let i = 0; i < wallet.length; i++) {
+        score += wallet.charCodeAt(i);
+      }
+
+      const tier = score % 3; // 0,1,2
+
+      let mainMessage = "";
+      let extraMessage = "";
+      let cssClass = "";
+
+      if (tier === 0) {
+        mainMessage = "Eligible: $PHRS bonus (Gocto Wave OG) 🎉";
+        extraMessage = "Fun-mode only. You hit an OG sailor combo in this checker.";
+        cssClass = "ok";
+      } else if (tier === 1) {
+        mainMessage = "Eligible: $PHRS bonus (Gocto small wave) ✨";
+        extraMessage = "Nice roll! This wallet looks lucky in our meme logic.";
+        cssClass = "ok";
+      } else {
+        mainMessage = "Not Eligible in this Gocto fun checker 😅";
+        extraMessage = "Try another wallet, or wait for the next Gocto / Pharos wave.";
+        cssClass = "nope";
+      }
+
+      resultText.textContent = mainMessage;
+      resultText.classList.remove("ok", "nope");
+      resultText.classList.add(cssClass);
+      resultExtra.textContent = extraMessage;
+    });
+  </script>
+</body>
+</html>
