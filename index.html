@@ -236,20 +236,69 @@
   </div>
 
   <script>
-    const walletInput = document.getElementById("wallet");
-    const checkBtn = document.getElementById("checkBtn");
-    const randomWalletBtn = document.getElementById("randomWalletBtn");
-    const resultText = document.getElementById("resultText");
-    const resultExtra = document.getElementById("resultExtra");
+  const walletInput = document.getElementById("wallet");
+  const checkBtn = document.getElementById("checkBtn");
+  const randomWalletBtn = document.getElementById("randomWalletBtn");
+  const resultText = document.getElementById("resultText");
+  const resultExtra = document.getElementById("resultExtra");
 
-    function randomHex(len) {
-      const chars = "0123456789abcdef";
-      let out = "0x";
-      for (let i = 0; i < len; i++) {
-        out += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return out;
+  function randomHex(len) {
+    const chars = "0123456789abcdef";
+    let out = "0x";
+    for (let i = 0; i < len; i++) {
+      out += chars[Math.floor(Math.random() * chars.length)];
     }
+    return out;
+  }
+
+  randomWalletBtn.addEventListener("click", () => {
+    walletInput.value = randomHex(40);
+    resultText.textContent = 'Random wallet generated. Tap "$PHRS eligibility".';
+    resultText.classList.remove("ok", "nope");
+    resultExtra.textContent = "This address is just for fun, not on-chain.";
+  });
+
+  checkBtn.addEventListener("click", () => {
+    const wallet = walletInput.value.trim();
+
+    if (!wallet || wallet.length < 6) {
+      resultText.textContent = "Please enter a longer wallet (or any random text).";
+      resultText.classList.remove("ok", "nope");
+      resultExtra.textContent = "Example: 0xabc123... or your meme name.";
+      return;
+    }
+
+    // FUN LOGIC ONLY – NOT REAL ELIGIBILITY
+    // ~70% chance: Eligible with 100–10,000 random $PHRS
+    const roll = Math.random();
+
+    let mainMessage = "";
+    let extraMessage = "";
+    let cssClass = "";
+
+    if (roll < 0.7) {
+      const min = 100;
+      const max = 10000;
+      const amount =
+        Math.floor(Math.random() * (max - min + 1)) + min; // 100–10000
+
+      mainMessage = `Eligible: ${amount.toLocaleString()} $PHRS (Gocto fun mode) 🎉`;
+      extraMessage =
+        "Random fun allocation between 100 and 10,000 $PHRS. This is not real airdrop math.";
+      cssClass = "ok";
+    } else {
+      mainMessage = "Not Eligible in this Gocto fun checker 😅";
+      extraMessage =
+        "Try another wallet, or wait for the next Gocto / Pharos wave.";
+      cssClass = "nope";
+    }
+
+    resultText.textContent = mainMessage;
+    resultText.classList.remove("ok", "nope");
+    resultText.classList.add(cssClass);
+    resultExtra.textContent = extraMessage;
+  });
+</script>
 
     randomWalletBtn.addEventListener("click", () => {
       walletInput.value = randomHex(40);
